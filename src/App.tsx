@@ -38,7 +38,7 @@ const AddModal: FunctionComponent = () => {
         Show Modal
       </Button>
       <Modal {...bindings}>
-        <Modal.Title>Addition Of Clien</Modal.Title>
+        <Modal.Title>Addition Of Client</Modal.Title>
         <Modal.Subtitle>Submission to the table</Modal.Subtitle>
         <Modal.Content>
           <p>Are you sure you want to submit this entry?</p>
