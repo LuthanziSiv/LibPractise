@@ -1,30 +1,32 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import { Table, Button, Modal, Text, Spacer, useModal } from "@geist-ui/react";
-
+import axios from "axios";
+// import { TableContent } from "./TableContent";
 
 const ClientTable: FunctionComponent = () => {
-  const data = [
-    {
-      firstname: "Vernon",
-      lastname: "Sivubwa",
-      email: "vksivubwa@gmail.com",
-    },
-    {
-      firstname: "Wendell",
-      lastname: "Smith",
+  const [loadingData, setLoadingData] = useState<boolean>(true);
+  
 
-      email: "wsmith@gmail.com",
-    },
-    {
-      firstname: "Hunter",
-      lastname: "Schafer",
-      email: "hunters@gmail.com",
-    },
-  ];
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
+      await axios
+        .get("https://clientsapi.gari.dev/clients")
+        .then((response) => {
+          console.log(response.data);
+          setData(response.data);
+          setLoadingData(false);
+        });
+    };
+    if (loadingData) {
+      getData();
+    }
+  }, []);
+
   return (
     <Table data={data}>
-      <Table.Column prop="firstname" label="firstname" />
-      <Table.Column prop="lastname" label="lastname" />
+      <Table.Column prop="firstName" label="firstName" />
+      <Table.Column prop="lastName" label="lastName" />
       <Table.Column prop="email" label="email" />
     </Table>
   );
@@ -35,7 +37,7 @@ const AddModal: FunctionComponent = () => {
   return (
     <>
       <Button auto onClick={() => setVisible(true)}>
-        Show Modal
+        Add client
       </Button>
       <Modal {...bindings}>
         <Modal.Title>Addition Of Client</Modal.Title>
@@ -66,3 +68,4 @@ function App() {
 }
 
 export default App;
+
