@@ -1,11 +1,6 @@
 import React, { FunctionComponent, useState } from "react";
 import { Table, Button, Modal, Text, Spacer, useModal } from "@geist-ui/react";
 
-interface ClientData {
-  firstname: string;
-  lastname: string;
-  email: string;
-}
 
 const ClientTable: FunctionComponent = () => {
   const data = [
